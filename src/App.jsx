@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import styled from 'styled-components';
+import Title from './components/Title';
+import Accordion from './components/Accordion';
+import faqs from './data/faqs.json';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AppContainer>
+      <Title />
+      {faqs.map((faq) => (
+        <Accordion
+          key={faq.id}
+          faq={faq}
+        />
+      ))}
+    </AppContainer>
+  );
 }
 
-export default App
+const AppContainer = styled.div`
+  display: flex;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0px 32px 56px 0px rgba(80, 0, 118, 0.1);
+  width: 279px;
+  @media (min-width: 768px) {
+    width: 520px;
+    padding: 40px;
+  }
+`;
+export default App;
